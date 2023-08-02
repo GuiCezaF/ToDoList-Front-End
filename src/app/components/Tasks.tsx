@@ -1,24 +1,31 @@
-const Tasks = () => {
-  return (
-    <div className="flex mx-auto ml-5 p-2">
-      <input
-        type="checkbox"
-        className=" relative peer shrink-0 appearance-none w-7 h-7 border-2 border-blackLight rounded-sm bg-blackLight checked:bg-checkedRed checked:border-0"
-      />
-      <label className="ml-2">Tarefa</label>
+"use client";
+import { useState } from "react";
 
-      <svg
-        className=" absolute w-6 h-6 hidden peer-checked:block"
-        xmlns="/CheckBox.svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
+const Tasks = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleOnChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  return (
+    <div className="flex mx-auto ml-5 p-2 flex-col ">
+      <div className="flex">
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleOnChange}
+          className="relative peer shrink-0 appearance-none w-7 h-7 mr-2 border-2 border-blackLight rounded-sm bg-blackLight checked:bg-checkedRed checked:border-0"
+        />
+        <label className={`text-lg ${isChecked ? "line-through" : ""}`}>
+          Tarefa
+        </label>
+      </div>
+      <div className="flex bg-blackLight rounded-full mx-5">
+        <div className={`text-lg ${isChecked ? "line-through" : ""}`}>
+          <p className="p-2">Descrição</p>
+        </div>
+      </div>
     </div>
   );
 };
